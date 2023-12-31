@@ -1,0 +1,12 @@
+C:\Users\marcos\Documents\mack\csgo\cs2\plugins\CustomDefaultAmmo\bin\Debug\net7.0\CustomDefaultAmmo.deps.json
+C:\Users\marcos\Documents\mack\csgo\cs2\plugins\CustomDefaultAmmo\bin\Debug\net7.0\CustomDefaultAmmo.dll
+C:\Users\marcos\Documents\mack\csgo\cs2\plugins\CustomDefaultAmmo\bin\Debug\net7.0\CustomDefaultAmmo.pdb
+C:\Users\marcos\Documents\mack\csgo\cs2\plugins\CustomDefaultAmmo\obj\Debug\net7.0\CustomDefaultAmmo.csproj.AssemblyReference.cache
+C:\Users\marcos\Documents\mack\csgo\cs2\plugins\CustomDefaultAmmo\obj\Debug\net7.0\CustomDefaultAmmo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\marcos\Documents\mack\csgo\cs2\plugins\CustomDefaultAmmo\obj\Debug\net7.0\CustomDefaultAmmo.AssemblyInfoInputs.cache
+C:\Users\marcos\Documents\mack\csgo\cs2\plugins\CustomDefaultAmmo\obj\Debug\net7.0\CustomDefaultAmmo.AssemblyInfo.cs
+C:\Users\marcos\Documents\mack\csgo\cs2\plugins\CustomDefaultAmmo\obj\Debug\net7.0\CustomDefaultAmmo.csproj.CoreCompileInputs.cache
+C:\Users\marcos\Documents\mack\csgo\cs2\plugins\CustomDefaultAmmo\obj\Debug\net7.0\CustomDefaultAmmo.dll
+C:\Users\marcos\Documents\mack\csgo\cs2\plugins\CustomDefaultAmmo\obj\Debug\net7.0\refint\CustomDefaultAmmo.dll
+C:\Users\marcos\Documents\mack\csgo\cs2\plugins\CustomDefaultAmmo\obj\Debug\net7.0\CustomDefaultAmmo.pdb
+C:\Users\marcos\Documents\mack\csgo\cs2\plugins\CustomDefaultAmmo\obj\Debug\net7.0\ref\CustomDefaultAmmo.dll
