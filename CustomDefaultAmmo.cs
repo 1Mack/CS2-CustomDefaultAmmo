@@ -10,6 +10,8 @@ public class CustomDefaultAmmoConfig : BasePluginConfig
 {
   [JsonPropertyName("Weapons")] public string Weapons { get; set; } = "weapon_awp,10,-1|weapon_deagle,-1,15";
 }
+
+[MinimumApiVersion(141)]
 public class CustomDefaultAmmo : BasePlugin, IPluginConfig<CustomDefaultAmmoConfig>
 {
   public override string ModuleName => "CustomDefaultAmmo";
