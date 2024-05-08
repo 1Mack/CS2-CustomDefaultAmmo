@@ -1,37 +1,19 @@
-﻿using System.Text.Json.Serialization;
-using CounterStrikeSharp.API;
+﻿using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Core.Attributes;
 
 
 namespace CustomDefaultAmmo;
 
-public class CustomDefaultAmmoConfig : BasePluginConfig
-{
-  [JsonPropertyName("Weapons")] public string Weapons { get; set; } = "weapon_awp,10,-1|weapon_deagle,-1,15";
-}
 
-[MinimumApiVersion(141)]
-public class CustomDefaultAmmo : BasePlugin, IPluginConfig<CustomDefaultAmmoConfig>
+[MinimumApiVersion(199)]
+public partial class CustomDefaultAmmo : BasePlugin, IPluginConfig<CustomDefaultAmmoConfig>
 {
   public override string ModuleName => "CustomDefaultAmmo";
   public override string ModuleDescription => "Change the default ammo on a weapon";
   public override string ModuleAuthor => "1MaaaaaacK";
-  public override string ModuleVersion => "1.0";
+  public override string ModuleVersion => "1.0.1";
 
-
-  public required CustomDefaultAmmoConfig Config { get; set; }
-
-  public void OnConfigParsed(CustomDefaultAmmoConfig config)
-  {
-
-    if (string.IsNullOrEmpty(config.Weapons))
-    {
-      throw new Exception($"Invalid value has been set to config value 'Weapons'");
-    }
-
-    Config = config;
-  }
 
   public override void Load(bool hotReload)
   {
@@ -39,49 +21,46 @@ public class CustomDefaultAmmo : BasePlugin, IPluginConfig<CustomDefaultAmmoConf
     {
       if (entity == null || entity.Entity == null || !entity.IsValid || !entity.DesignerName.Contains("weapon_")) return;
 
-      foreach (var item in Config.Weapons.Split("|"))
+      foreach (var item in Config.Weapons)
       {
-        string[] weaponValues = item.Split(",");
-
-        if (weaponValues.Length < 2) continue;
+        if (string.IsNullOrEmpty(item.Name) || (!item.Clip1.HasValue && !item.ReserveAmmo.HasValue)) continue;
 
 
         Server.NextFrame(() =>
         {
 
-          var weapon = new CBasePlayerWeapon(entity.Handle);
+          CBasePlayerWeapon weapon = new(entity.Handle);
 
           if (!weapon.IsValid) return;
 
+          item.Name = item.Name.Trim();
 
-          weaponValues[0] = weaponValues[0].Trim();
-
-          if (!checkIfWeapon(weaponValues[0], weapon.AttributeManager.Item.ItemDefinitionIndex)) return;
+          if (!checkIfWeapon(item.Name, weapon.AttributeManager.Item.ItemDefinitionIndex)) return;
 
           CCSWeaponBase _weapon = weapon.As<CCSWeaponBase>();
           if (_weapon == null) return;
 
-          if (weaponValues[1] != "-1")
+          if (item.Clip1.HasValue && item.Clip1 != -1)
           {
             if (_weapon.VData != null)
             {
-              _weapon.VData.MaxClip1 = int.Parse(weaponValues[1]);
-              _weapon.VData.DefaultClip1 = int.Parse(weaponValues[1]);
+              _weapon.VData.MaxClip1 = item.Clip1.Value;
+              _weapon.VData.DefaultClip1 = item.Clip1.Value;
             }
 
-            _weapon.Clip1 = int.Parse(weaponValues[1]);
+            _weapon.Clip1 = item.Clip1.Value;
 
             Utilities.SetStateChanged(weapon.As<CCSWeaponBase>(), "CBasePlayerWeapon", "m_iClip1");
 
           }
 
-          if (weaponValues[2].Length > 0 && weaponValues[2] != "-1")
+          if (item.ReserveAmmo.HasValue && item.ReserveAmmo != -1)
           {
             if (_weapon.VData != null)
             {
-              _weapon.VData.PrimaryReserveAmmoMax = int.Parse(weaponValues[2]);
+              _weapon.VData.PrimaryReserveAmmoMax = item.ReserveAmmo.Value;
             }
-            _weapon.ReserveAmmo[0] = int.Parse(weaponValues[2]);
+            _weapon.ReserveAmmo[0] = item.ReserveAmmo.Value;
 
             Utilities.SetStateChanged(weapon.As<CCSWeaponBase>(), "CBasePlayerWeapon", "m_pReserveAmmo");
           }
@@ -129,7 +108,7 @@ public class CustomDefaultAmmo : BasePlugin, IPluginConfig<CustomDefaultAmmoConf
         { 64, "weapon_revolver" },
       };
 
-      if (WeaponDefindex.ContainsKey(weaponDefIndex) && WeaponDefindex[weaponDefIndex] == weaponName) return true;
+      if (WeaponDefindex.TryGetValue(weaponDefIndex, out string? value) && value == weaponName) return true;
 
       return false;
     }
