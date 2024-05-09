@@ -14,8 +14,8 @@ The config is created automatically. ***(Path: `csgo/addons/counterstrikesharp/c
   "Weapons": [
     {
       "Name": "weapon_awp",
-      "Clip1": 10,
-      "ReserveAmmo": -1
+      "Clip1": 10, //-1 = Ignore
+      "ReserveAmmo": -1 // -1 = Ignore
     },
     {
      ...
