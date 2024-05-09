@@ -23,7 +23,7 @@ public partial class CustomDefaultAmmo
 public class CustomDefaultAmmoConfig : BasePluginConfig
 {
   [JsonPropertyName("Weapons")]
-  public Weapons[] Weapons { get; set; } = new Weapons[] { new() };
+  public Weapons[] Weapons { get; set; } = [new()];
 }
 public class Weapons
 {

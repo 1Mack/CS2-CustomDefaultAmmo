@@ -11,6 +11,15 @@ The config is created automatically. ***(Path: `csgo/addons/counterstrikesharp/c
 ```
 {
   "Version": 1,
-  "Weapons": "weapon_awp,10,-1|weapon_deagle,-1,15", //First Argument = weapon name, Second Argument = clip1 (-1 = ignore), Third Argument = reserv ammo (-1 = ignore).  Use "|" to separete 
+  "Weapons": [
+    {
+      "Name": "weapon_awp",
+      "Clip1": 10,
+      "ReserveAmmo": -1
+    },
+    {
+     ...
+    }
+  ]
 }
 ```
